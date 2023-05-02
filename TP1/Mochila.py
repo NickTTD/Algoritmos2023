@@ -8,7 +8,7 @@ b. determinar si la mochila contiene un sable de luz y cuantos objetos fueron ne
 car para encontrarlo;
 c. Utilizar un vector para representar la mochila.'''
 
-mochila = ['blaster', 'comida', 'repuestos','xd', 'sable de luz']
+mochila = ['blaster', 'comida', 'repuestos', 'sable de luz']
 cont = 0
 
 def usar_la_fuerza(mochila, cont):
