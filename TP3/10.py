@@ -51,7 +51,7 @@ for i in range(Notificaciones_A.size()):
 print('---------B-------- Notif de twitter con "python" en el mensaje')
 Notificaciones_B = deepcopy(Notificaciones)
 for _ in range(Notificaciones_B.size()):
-    Elemento = Notificaciones_B.atention()
+    Elemento = Notificaciones_B.move_to_end() #Cambié esto el 7/6/2023
     if (Elemento.get_app() == "Twitter") and ("Python" in Elemento.get_mensaje()):
         Elemento.mostrar_notificacion()
         print("----------")
