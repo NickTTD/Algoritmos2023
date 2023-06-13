@@ -6,6 +6,7 @@ from copy import deepcopy
 
 # F) –por ejemplo {Tony Stark, Iron Man, M}, {Steve Rogers, Capitán América, M}, {Natasha Ro-
 # manoff, Black Widow, F}, etc., desarrollar un algoritmo que resuelva las siguientes actividades:
+
 ListaPersonajes=[] #(Esta vez lo hice con una lista para no tener que agregar manualmente a la cola)
 ListaPersonajes.append(Personaje("Tony Stark","Iron Man","M"))
 ListaPersonajes.append(Personaje("Miles Morales","Spiderman","M"))
