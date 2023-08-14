@@ -102,8 +102,7 @@ def e():
 def f():
     for Personaje in DataPersonajesExtra:
         ListaPersonajes.insert(Personaje, 'nombreHeroe')
-    #ListaPersonajes.barrido()
-f()
+
 #g. Mostrar todos los personajes que comienzan con C, P o S.
 def g(): #Lo hice con nombre de heroe(porque todos tienen) y solo mostré el nombre, no todos los datos
     for i in range(ListaPersonajes.size()):
