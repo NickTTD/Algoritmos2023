@@ -39,6 +39,6 @@ ordenados.sort(key=order_por, reverse=True)
 print(ordenados[:3])
 
 
-pos = arbol.search()
-if pos is not None:
-    pos.other_values['capturado'] = 'Heracles'
+# pos = arbol.search()
+# if pos is not None:
+#     pos.other_values['capturado'] = 'Heracles'

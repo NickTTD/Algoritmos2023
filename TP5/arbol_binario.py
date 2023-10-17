@@ -217,17 +217,7 @@ class BinaryTree:
                     print(root.value)
                 __inorden_start_with(root.right, cadena)
 
-    def inorden_start_with_jedi(self, cadena):
-        def __inorden_start_with_jedi(root, cadena):
-            if root is not None:
-                __inorden_start_with_jedi(root.left, cadena)
-                if root.value.upper().startswith(cadena):
-                    print(root.value)
-                __inorden_start_with_jedi(root.right, cadena)
-
-        __inorden_start_with_jedi(self.root, cadena)
-
-    def inorden_in_jedi(self, cadena):
+    def inorden_in_jedi(self, cadena): #Probablemente mal nombre, busca caracteres en el string del 
         def __inorden_in_jedi(root, cadena):
             if root is not None:
                 __inorden_in_jedi(root.left, cadena)
