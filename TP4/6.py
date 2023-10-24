@@ -57,7 +57,7 @@ def c():
 
 #d. mostrar el nombre de aquellos superhéroes que en su biografía menciona la palabra
 #“traje” o “armadura”;
-def c():
+def d():
     for i in range(ListaPersonajes.size()):
         Bio = ListaPersonajes.get_element_by_index(i).biografia
         if "traje" in Bio or "armadura" in Bio:

@@ -113,6 +113,32 @@ class BinaryTree:
                     cola_tree.arrive(node.left)
                 if node.right is not None:
                     cola_tree.arrive(node.right)
+                    
+    def by_level_heroe(self):
+        if self.root is not None:
+            cola_tree = Cola()
+            if self.root.other_values is True:
+                cola_tree.arrive(self.root)
+            while cola_tree.size() > 0:
+                node = cola_tree.atention()
+                if node.other_values is True:  # Verifica si es un héroe antes de imprimir
+                    print(node.value)
+                if node.left is not None:
+                    cola_tree.arrive(node.left)
+                if node.right is not None:
+                    cola_tree.arrive(node.right)
+
+    def inorden_super_or_villano(self, is_hero):
+        def __inorden_s_v(root, is_hero):
+            if root is not None:
+                __inorden_s_v(root.left, is_hero)
+                if root.other_values is is_hero:
+                    print(root.value)
+                __inorden_s_v(root.right, is_hero)
+
+        __inorden_s_v(self.root, is_hero)
+
+    
 
     def inorden(self):
         def __inorden(root):
@@ -216,6 +242,8 @@ class BinaryTree:
                 if root.other_values is True and root.value.upper().startswith(cadena):
                     print(root.value)
                 __inorden_start_with(root.right, cadena)
+
+        __inorden_start_with(self.root, cadena)
 
     def inorden_in_jedi(self, cadena): #Probablemente mal nombre, busca caracteres en el string del root
         def __inorden_in_jedi(root, cadena):
@@ -326,6 +354,19 @@ class BinaryTree:
             return count
 
         return __contar_heroes(self.root)
+    
+    def tree_split(self, Arbol_A, Arbol_B):
+        def __preorden(root, Arbol_A, Arbol_B):
+            if root is not None:
+                if root.other_values is True:
+                    Arbol_A.insert_node(root.value, root.other_values)
+                else:
+                    Arbol_B.insert_node(root.value, root.other_values)
+                
+                __preorden(root.left, Arbol_A, Arbol_B)
+                __preorden(root.right, Arbol_A, Arbol_B)
+
+        __preorden(self.root, Arbol_A, Arbol_B)
 
 # arbol = BinaryTree()
 
