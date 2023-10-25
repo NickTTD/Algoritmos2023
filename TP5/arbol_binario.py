@@ -255,15 +255,81 @@ class BinaryTree:
 
         __inorden_in_jedi(self.root, cadena)
 
-            
-    def postorden(self):
-        def __postorden(root):
-            if root is not None:
-                __postorden(root.right)
-                print(root.value)
-                __postorden(root.left)
+    #Quería practicar usar descripciones de funciones, así que...
+    # La función mostrar_criatura la usé originalmente para mostrar toda la información de una criatura, pero aprendí como
+    #hacerlo genérico, e implementé la función "print node", sin embargo no borré esto porque quedó a modo de explicación de como llegué a lo otro
+    def mostrar_criatura(self, node):
+        """
+        Muestra la información de una criatura, incluyendo su nombre, quién la derrotó y la descripción.
+        Debería ser usada luego de un Search, o una función que devuelva un nodo del árbol
 
-        __postorden(self.root)
+        Parámetros:
+        - node (NodeTree): El nodo que representa la criatura en el árbol.
+        """
+        print(f'Nombre: {node.value}| Derrotado por: {node.other_values["derrotado"]}| Descripción: {node.other_values.get("descripcion", "Sin descripción")}')
+
+    def print_node(self, node):
+        """
+        Muestra todos los valores en other_values de un nodo, soporta diccionarios y other values de tipos de datos simples
+
+        Parámetros:
+        - node (NodeTree): El nodo que se va a mostrar.
+        """
+        print('-----')
+        print(node.value)
+        
+        # Verificar si other_values es un diccionario
+        if isinstance(node.other_values, dict):
+            for key, value in node.other_values.items():
+                print(f'{key}: {value}')
+        else:
+            print(f'other_values: {node.other_values}')
+
+    def search_print_node(self, key):
+        """
+        Busca un nodo en el árbol por la clave dada y muestra el nombre del nodo y los other values, si se encuentra.
+
+        Parámetros:
+        - key (str): La clave del nodo que se va a buscar y mostrar.
+        """
+        pos = self.search(key)
+        if pos:
+            self.print_node(pos)
+        else:
+            print(f'Nodo con clave {key} no encontrado en el árbol.')
+
+    
+    def inorden_criaturas(self):
+        def __inorden_criaturas(root):
+            if root is not None:
+                __inorden_criaturas(root.left)
+                self.mostrar_criatura(root)
+                __inorden_criaturas(root.right)
+
+        __inorden_criaturas(self.root)
+
+    def inorden_derrotado_por_heroe(self, heroe):
+        def __inorden_derrotado(root, heroe):
+            if root is not None:
+                __inorden_derrotado(root.left, heroe)
+
+                if root.other_values['derrotado'] == heroe:
+                    self.mostrar_criatura(root)
+
+                __inorden_derrotado(root.right, heroe)
+
+        __inorden_derrotado(self.root, heroe)
+
+        
+                
+    def nodetorden(self):
+        def __nodetorden(root):
+            if root is not None:
+                __nodetorden(root.right)
+                print(root.value)
+                __nodetorden(root.left)
+
+        __nodetorden(self.root)
 
     def preorden(self):
         def __preorden(root):
@@ -278,11 +344,34 @@ class BinaryTree:
         def __search_by_coincidence(root, value):
             if root is not None:
                 if root.value.startswith(value):
-                    print(root.value)
+                    #print(root.value)                     #Solo printear el nombre del nodo
+                    self.print_node(root)                  #Printear toda la info del nodo
                 __search_by_coincidence(root.left, value)
                 __search_by_coincidence(root.right, value)
 
         __search_by_coincidence(self.root, value)
+    def get_nodes_starting_with(self, value):
+        """
+        Obtiene nodos cuyos nombres comienzan con el valor dado.
+
+        Parámetros:
+        - value (str): El valor con el cual comparar el inicio del nombre de los nodos.
+
+        Retorna:
+        - list: Lista de nodos encontrados.
+        """
+        matching_nodes = []
+
+        def __get_nodes_starting_with(root, value):
+            if root is not None:
+                if root.value.startswith(value):
+                    matching_nodes.append(root)
+                __get_nodes_starting_with(root.left, value)
+                __get_nodes_starting_with(root.right, value)
+
+        __get_nodes_starting_with(self.root, value)
+        
+        return matching_nodes
 
     def search(self, key):
         def __search(root, key):
@@ -374,7 +463,7 @@ class BinaryTree:
 #     arbol.insert_node(name, {'derrotado_por': derrotado})
 
 
-# pos.other_values['capurado_por'] = 'asdas'
+# node.other_values['capurado_por'] = 'asdas'
 # arbol.preorden()
 
 # arbol.root = arbol.balancing(arbol.root)
@@ -408,7 +497,7 @@ class BinaryTree:
 
 
 # print()
-# pos = arbol.search('Z')
-# print(pos)
-# if pos:
-#     print('valor encontrado', pos.value)
+# node = arbol.search('Z')
+# print(node)
+# if node:
+#     print('valor encontrado', node.value)
