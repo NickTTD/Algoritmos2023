@@ -61,9 +61,12 @@ class Grafo():
         origen = self.search_vertice(vertice_ori, criterio_vertice)
         destino = self.search_vertice(vertice_des, criterio_vertice)
         if origen is not None and destino is not None:
+            criterio_vertice_ori = criterio_vertice if criterio_vertice else 'nombre'  # Criterio predeterminado si no se especifica
+            criterio_vertice_des = criterio_vertice if criterio_vertice else 'nombre'  # Criterio predeterminado si no se especifica
             self.get_element_by_index(origen)[1].insert(Arista(vertice_des, peso), criterio_arista)
             if not self.dirigido:
                 self.get_element_by_index(destino)[1].insert(Arista(vertice_ori, peso), criterio_arista)
+
 
     def search_vertice(self, search_value, criterio=None):
         """
@@ -142,8 +145,9 @@ class Grafo():
         Realiza un barrido de los vértices ordenados en el grafo.
         """
         for value in self.__elements:
+            print('-------------------- Vertice --------------------')
             print(value[0])
-            print('Aristas --------------------')
+            print('-------------------- Aristas --------------------')
             value[1].barrido()
             print()
 
