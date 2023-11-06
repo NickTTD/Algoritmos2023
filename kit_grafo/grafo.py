@@ -29,7 +29,7 @@ class Grafo():
         self.__elements = []
         self.dirigido = dirigido
 
-    def insert_vertice(self, value, criterio=None):
+    def insert_vertex(self, value, criterio=None):
         """
         Agrega un vértice al grafo.
 
@@ -143,7 +143,7 @@ class Grafo():
         """
         for value in self.__elements:
             print(value[0])
-            print('Arsitas --------------------')
+            print('Aristas --------------------')
             value[1].barrido()
             print()
 
@@ -266,19 +266,10 @@ class Grafo():
                             result = self.has_path(adjacente[0], destino)
         return result
 
+    
     def dijkstra(self, origen, destino):
         from math import inf
-        """
-        Aplica el algoritmo de Dijkstra para hallar el camino más corto.
-
-        Parámetros:
-        - origen: Vértice de origen desde el cual se calcularán los caminos más cortos.
-        - destino: Vértice de destino al cual se calculará el camino más corto.
-
-        Retorna:
-        Una estructura de datos que representa el camino más corto desde el vértice de origen hasta el vértice de destino,
-        junto con la información asociada, como el peso total del camino.
-        """
+        """Algoritmo de Dijkstra para hallar el camino mas corto."""
         no_visitados = Heap()
         camino = Pila()
         for i in range(self.size()):
@@ -301,19 +292,17 @@ class Grafo():
                         no_visitados.change_priority(pos, vertice[0] + arista.peso)
         return camino
 
-
     def kruskal(self):
-        """
-        Aplica el algoritmo de Kruskal para encontrar el árbol de expansión mínimo del grafo.
-
-        Retorna:
-        Una lista que representa el bosque de expansión mínimo.
-        """
         def buscar_en_bosque(bosque, buscado):
             for index, arbol in enumerate(bosque):
                 if buscado in arbol:
                     return index
-
+                
+        if self.dirigido: #Esto simplemente cambia la flecha en el arbol que se genera al final, dependiendo de si el grafo es dirigido o no
+            flecha = '->'
+        else:
+            flecha = '<->'
+        peso_total = 0 #Añadí esto para que también returnee el peso total 
         bosque = []
         aristas = Heap()
         for index in range(self.size()):
@@ -337,91 +326,15 @@ class Grafo():
                         vertice_des = bosque.pop(destino)
                         vertice_ori = bosque.pop(origen)
 
+                    peso_total += arista[0]  # Sumar el peso de la arista al peso total
+
                     if '-' not in vertice_ori and '-' not in vertice_des:
-                        bosque.append(f'{vertice_ori}-{vertice_des}-{arista[0]}')
+                        bosque.append(f'{vertice_ori} {flecha} {vertice_des}  ({arista[0]})')
                     elif '-' not in vertice_des:
-                        bosque.append(vertice_ori+';'+f'{arista[1][0]}-{vertice_des}-{arista[0]}')
+                        bosque.append(vertice_ori+'|||'+f'{arista[1][0]} {flecha} {vertice_des}  ({arista[0]})')
                     elif '-' not in vertice_ori:
-                        bosque.append(vertice_des+';'+f'{vertice_ori}-{arista[1][1]}-{arista[0]}')
+                        bosque.append(vertice_des+'|||'+f'{vertice_ori} {flecha} {arista[1][1]}  ({arista[0]})')
                     else:
-                        bosque.append(vertice_ori+';'+vertice_des+';'+f'{arista[1][0]}-{arista[1][1]}-{arista[0]}')
+                        bosque.append(vertice_ori+';'+vertice_des+';'+f'{arista[1][0]} {flecha} {arista[1][1]}  ({arista[0]})')
 
-        return bosque
-
-from random import randint
-
-mi_grafo = Grafo(dirigido=False)
-
-mi_grafo.insert_vertice('T')
-mi_grafo.insert_vertice('F')
-mi_grafo.insert_vertice('X')
-mi_grafo.insert_vertice('R')
-mi_grafo.insert_vertice('Z')
-
-mi_grafo.insert_vertice('P')
-mi_grafo.insert_vertice('J')
-
-mi_grafo.insert_arist('P', 'J', 8)
-mi_grafo.insert_arist('T', 'R', 8)
-mi_grafo.insert_arist('T', 'F', 3)
-mi_grafo.insert_arist('T', 'X', 6)
-mi_grafo.insert_arist('F', 'R', 2)
-mi_grafo.insert_arist('F', 'X', 2)
-mi_grafo.insert_arist('X', 'Z', 9)
-mi_grafo.insert_arist('X', 'R', 5)
-mi_grafo.insert_arist('R', 'Z', 4)
-
-# mi_grafo.barrido()
-
-origen = 'A'
-destino = 'Z'
-
-pos_origen = mi_grafo.search_vertice(origen)
-if pos_origen is not None:
-    ver_origen = mi_grafo.get_element_by_index(pos_origen)
-    pos_arista = ver_origen[1].search(destino, 'vertice')
-    if pos_arista is not None:
-        arista = ver_origen[1].get_element_by_index(pos_arista)
-        print(f'datos de la arista origen {origen} destino {arista.vertice} peso {arista.peso}')
-
-
-# print(mi_grafo.delete_arista('A', 'B'))
-# print(mi_grafo.delete_vertice('B'))
-# print(mi_grafo.is_adyacent('A', 'F'))
-# print()
-# mi_grafo.adyacents('A')
-
-mi_grafo.barrido()
-print()
-# mi_grafo.deep_list(poscion=2)
-# print()
-# mi_grafo.deep_list()
-# mi_grafo.mark_as_not_visited()
-# print()
-# mi_grafo.amplitude_list()
-
-
-# print(mi_grafo.has_path('A', 'F'))
-
-# path = mi_grafo.dijkstra('A', 'F')
-
-# ori = 'Z'
-# des = 'X'
-# origen = mi_grafo.search_vertice(ori)
-# destino = mi_grafo.search_vertice(des)
-# camino_mas_corto = None
-# if(origen is not None and destino is not None):
-#     if(mi_grafo.has_path(ori, des)):
-#         camino_mas_corto = mi_grafo.dijkstra(ori, des)
-#         fin = des
-#         while camino_mas_corto.size() > 0:
-#             value = camino_mas_corto.pop()
-#             if fin == value[0]:
-#                 print(value[0], value[1])
-#                 fin = value[2]
-
-bosque = mi_grafo.kruskal()
-for arbol in bosque:
-    print('arbol')
-    for nodo in arbol.split(';'):
-        print(nodo)
+        return bosque, peso_total

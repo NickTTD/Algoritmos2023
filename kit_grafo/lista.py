@@ -9,7 +9,7 @@ def criterio_comparacion(value, criterio):
             print('no se puede ordenar por este criterio')
 
 
-class ListaSimple():
+class Lista():
 
     def __init__(self):
         self.__elements = []
