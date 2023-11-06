@@ -69,6 +69,8 @@ def c():
 
 #d. determinar cuál es el camino más corto desde la habitación 1 hasta la sala de estar para
 #determinar cuántos metros de cable de red se necesitan para conectar el router con el Smart Tv.
+#Agarré el código que hicimos y básicamente metí la output en una lista de python para hacer un poco mas estética la output
+#probablemente debería meter esto en una función en la clase Grafo...
 def d():
     ori = 'habitación 1'
     des = 'sala de estar'
