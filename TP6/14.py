@@ -85,20 +85,21 @@ def d():
                 if fin == value[0]:
                     listaOutput.append((value[0], value[1]))
                     fin = value[2]
-    listaOutput.reverse()
+            listaOutput.reverse()
 
-    # Extract the last tuple and print only the number
-    last_tuple = listaOutput[-1]
-    last_number = last_tuple[1]
-    print(f'El peso total del camino es: {last_number}')
+            # Obtengo el numero de la última tupla
+            last_tuple = listaOutput[-1]
+            last_number = last_tuple[1]
+            print(f'El peso total del camino es: {last_number}')
 
-    # Remove all numbers from the list
-    listaOutput = [place for place, _ in listaOutput]
+            #Quitar numeros de la lista
+            listaOutput = [place for place, _ in listaOutput]
 
-    # Print all tuples without numbers
-    print('Con el siguiente camino: ')
-    formatted_output = " -> ".join(f'{place}' for place in listaOutput)
-    print(formatted_output)
+            #Printear las tuplas sin numeros
+            print('Con el siguiente camino: ')
+            formatted_output = " -> ".join(f'{place}' for place in listaOutput)
+            print(formatted_output)
+        else:
+            print('No hay camino')
 
-# Call the function d()
 d()
