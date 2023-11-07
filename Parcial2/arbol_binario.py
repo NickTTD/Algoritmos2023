@@ -149,6 +149,17 @@ class BinaryTree:
 
         __inorden(self.root)
 
+    def inorden_pokemon(self, tipo):
+        def __inorden_pokemon(root, tipo):
+            if root is not None:
+                __inorden_pokemon(root.left, tipo)
+                if tipo in root.value:
+                    print(root.other_values['name'])
+                __inorden_pokemon(root.right, tipo)
+
+        __inorden_pokemon(self.root, tipo)
+
+
     def inorden_ranking(self, ranking):
         def __inorden_ranking(root, ranking):
             if root is not None:
@@ -320,20 +331,6 @@ class BinaryTree:
 
         __inorden_derrotado(self.root, heroe)
 
-    def inorden_pokemon_tipo(self, tipo_buscar): #Intenté hacer esto para el punto C 
-        def __inorden_pokemon_tipo(root, tipo_buscar):
-            if root is not None:
-                __inorden_pokemon_tipo(root.left, tipo_buscar)
-
-                # Assuming 'tipo' is the key for storing Pokémon type in other_values
-                if 'tipo' in root.other_values and tipo_buscar.lower() in root.other_values['tipo'].lower():
-                    print(root.value)
-
-                __inorden_pokemon_tipo(root.right, tipo_buscar)
-
-        __inorden_pokemon_tipo(self.root, tipo_buscar.lower())
-
-        
                 
     def nodetorden(self):
         def __nodetorden(root):

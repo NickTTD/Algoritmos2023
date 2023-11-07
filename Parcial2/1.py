@@ -47,11 +47,12 @@ def b2 (): #Por numero sin proximidad
     arbol_number.search_print_node(buscado)
 
 #c) mostrar todos los nombres de todos los Pokémons de un determinado tipo agua, fuego, planta y eléctrico;
-def c(): #Intenté hacer una modificación del inorden que acepte una lista, pero no logré hacerlo funcionar, está en arbol_binario.py con nombre inorden_pokemon_tip
-    arbol_tipo.search_by_coincidence('water')
-    arbol_tipo.search_by_coincidence('fire')
-    arbol_tipo.search_by_coincidence('plant')
-    arbol_tipo.search_by_coincidence('electric')
+def c():#Con un inorden modificado; 
+    lista_tipos=['water', 'fire', 'plant', 'electric']
+    for tipo in lista_tipos:
+        print('Pokemons de tipo', tipo)
+        arbol_tipo.inorden_pokemon(tipo)
+    
 
 
 #d) realizar un listado en orden ascendente por número y nombre de Pokémon, y
@@ -59,7 +60,7 @@ def c(): #Intenté hacer una modificación del inorden que acepte una lista, per
 
 def d():
     print('inorden ascendente ')
-    #arbol_number.nodetorden_pokemon()  #pensé que había que modificar el inorden invertido para tamibién mostrar nombre
+    #arbol_number.nodetorden_pokemon()  #pensé que había que modificar el inorden invertido para también mostrar nombre
     arbol_number.nodetorden()
     arbol_name.inorden()
     print('')
@@ -80,3 +81,5 @@ def f():
     print('De tipo eléctrico hay: ',arbol_tipo.contar('electric'))
     print('De tipo acero hay: ',arbol_tipo.contar('steel'))
 
+
+c()
