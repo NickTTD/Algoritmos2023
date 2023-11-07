@@ -14,6 +14,12 @@ class Maravilla:
 
     def __str__(self):
         return f'{self.nombre} - {self.pais} - {self.tipo}'
+    
+    def __lt__(self, other):
+        # Define la lógica de comparación para la clase Maravilla
+        # Puedes ajustar esto según tus necesidades, por ejemplo, comparando por nombre
+        return self.nombre < other.nombre
+
 def insertar_vertices():
     grafo_maravillas.insert_vertex(Maravilla('Gran Muralla China', 'China', 'arquitectónica'), criterio='nombre')
     grafo_maravillas.insert_vertex(Maravilla('Petra', 'Jordania', 'arquitectónica'), criterio='nombre')
@@ -95,11 +101,11 @@ insertar_aristas()
 
 #print(grafo_maravillas.barrido())
 def c():
-    bosque, total = grafo_maravillas.kruskal()
+    bosque = grafo_maravillas.kruskal_original()
     for arbol in bosque:
-     print('arbol')
-    for nodo in arbol.split('|||'):
-        print(nodo)
-    print('El total es de ', total)
+        print('arbol')
+        for nodo in arbol.split(';'):
+            print(nodo)
+        print('El total es de ', total)
 
 c()

@@ -104,4 +104,4 @@ def d():
         else:
             print('No hay camino')
 
-d()
+c()

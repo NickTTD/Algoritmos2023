@@ -150,6 +150,32 @@ class Grafo():
             print('-------------------- Aristas --------------------')
             value[1].barrido()
             print()
+    
+    
+
+    def barrido_mas_pesado(self):
+        """
+        Realiza un barrido de los vértices ordenados en el grafo y al final muestra el vértice con la arista más pesada.
+        """
+        vertice_mas_pesado = None
+        arista_mas_pesada = None
+        peso_maximo = float('-inf')
+
+        for value in self.__elements:
+            for i in range(value[1].size()):
+                arista = value[1].get_element_by_index(i)
+                if arista.peso > peso_maximo:
+                    peso_maximo = arista.peso
+                    vertice_mas_pesado = value[0]
+                    arista_mas_pesada = arista
+
+        print('-------------------- Vértice más pesado --------------------')
+        print(vertice_mas_pesado)
+        print('-------------------- Arista más pesada --------------------')
+        if arista_mas_pesada:
+            print(f"{arista_mas_pesada.vertice} con un peso de {arista_mas_pesada.peso}")
+        else:
+            print("No hay aristas en el grafo.")
 
     # def order_by(self, criterio=None, reverse=False):
     #     dic_atributos = self.__elements[0][0].__dict__
@@ -339,7 +365,7 @@ class Grafo():
                     elif '-' not in vertice_ori:
                         bosque.append(vertice_des+'|||'+f'{vertice_ori} {flecha} {arista[1][1]}  ({arista[0]})')
                     else:
-                        bosque.append(vertice_ori+';'+vertice_des+';'+f'{arista[1][0]} {flecha} {arista[1][1]}  ({arista[0]})')
+                        bosque.append(vertice_ori+'|||'+vertice_des+'|||'+f'{arista[1][0]} {flecha} {arista[1][1]}  ({arista[0]})')
 
         return bosque, peso_total
     
