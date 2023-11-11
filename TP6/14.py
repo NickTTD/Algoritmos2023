@@ -69,8 +69,9 @@ def c():
 
 #d. determinar cuál es el camino más corto desde la habitación 1 hasta la sala de estar para
 #determinar cuántos metros de cable de red se necesitan para conectar el router con el Smart Tv.
+
 #Agarré el código que hicimos y básicamente metí la output en una lista de python para hacer un poco mas estética la output
-#probablemente debería meter esto en una función en la clase Grafo...
+#Mi intención era meter esto en la clase Grafo, pero luego la cambiamos para que funcione con objetos así que lo dejé así...
 def d():
     ori = 'habitación 1'
     des = 'sala de estar'
@@ -85,23 +86,22 @@ def d():
             while camino_mas_corto.size() > 0:
                 value = camino_mas_corto.pop()
                 if fin == value[0]:
-                    listaOutput.append((value[0], value[1]))
+                    listaOutput.append((value[0], value[1])) #Originalmente era un print
                     fin = value[2]
-            listaOutput.reverse()
+            listaOutput.reverse() #Originalmente el camino se imprimía de arriba hacia abajo, por lo que...
 
-            # Obtengo el numero de la última tupla
-            last_tuple = listaOutput[-1]
-            last_number = last_tuple[1]
+            
+            last_tuple = listaOutput[-1]#Obtengo la última tupla de la lista 
+            last_number = last_tuple[1]#Y el número de la túpla (Este es el valor total del camino, ya que se van sumando)
             print(f'El peso total del camino es: {last_number}')
 
-            #Quitar numeros de la lista
-            listaOutput = [place for place, _ in listaOutput]
+            listaOutput = [place for place, _ in listaOutput]#Quitar numeros de la lista
 
             #Printear las tuplas sin numeros
             print('Con el siguiente camino: ')
-            formatted_output = " -> ".join(f'{place}' for place in listaOutput)
-            print(formatted_output)
+            print(" -> ".join(f'{place}' for place in listaOutput)) #Esta cosa ilegible Inserta una flecha -> entre cada lugar de la lista de output
         else:
             print('No hay camino')
 
-c()
+
+d()

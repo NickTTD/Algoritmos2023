@@ -1,4 +1,4 @@
-from grafo import Grafo
+from grafo_objetos import Grafo
 
 # Se requiere implementar un grafo para almacenar las siete maravillas arquitectónicas modernas y naturales 
 # del mundo, para lo cual se deben tener en cuenta las siguientes actividades:
@@ -14,22 +14,22 @@ class Maravilla:
 
     def __str__(self):
         return f'{self.nombre} - {self.pais} - {self.tipo}'
+
+    def __eq__(self, other):
+        """Define la igualdad entre dos objetos Maravilla."""
+        return isinstance(other, Maravilla) and self.pais == other.pais
     
-    def __lt__(self, other):
-        # Define la lógica de comparación para la clase Maravilla
-        # Puedes ajustar esto según tus necesidades, por ejemplo, comparando por nombre
-        return self.nombre < other.nombre
 
 def insertar_vertices():
     grafo_maravillas.insert_vertex(Maravilla('Gran Muralla China', 'China', 'arquitectónica'), criterio='nombre')
     grafo_maravillas.insert_vertex(Maravilla('Petra', 'Jordania', 'arquitectónica'), criterio='nombre')
     grafo_maravillas.insert_vertex(Maravilla('Cristo Redentor', 'Brasil', 'arquitectónica'), criterio='nombre')
-    grafo_maravillas.insert_vertex(Maravilla('Chichén Itzá', 'México', 'arquitectónica'), criterio='nombre')
-    grafo_maravillas.insert_vertex(Maravilla('Machu Picchu', 'Perú', 'arquitectónica'), criterio='nombre')
+    grafo_maravillas.insert_vertex(Maravilla('Chichén Itzá', 'Brasil', 'arquitectónica'), criterio='nombre') #Puse que Chichen Itzá está en Brasil para que funcione el punto E
+    grafo_maravillas.insert_vertex(Maravilla('Machu Picchu', 'Brasil', 'arquitectónica'), criterio='nombre')
     grafo_maravillas.insert_vertex(Maravilla('Coliseo de Roma', 'Italia', 'arquitectónica'), criterio='nombre')
     grafo_maravillas.insert_vertex(Maravilla('Muralla de Adriano', 'Reino Unido', 'arquitectónica'), criterio='nombre')
 
-    grafo_maravillas.insert_vertex(Maravilla('Amazonia', 'Varios países', 'natural'), criterio='nombre')
+    grafo_maravillas.insert_vertex(Maravilla('Amazonia', 'Italia', 'natural'), criterio='nombre') #Puse que Amazonia está en Italia para que funcione el punto D
     grafo_maravillas.insert_vertex(Maravilla('Bahía de Ha-Long', 'Vietnam', 'natural'), criterio='nombre')
     grafo_maravillas.insert_vertex(Maravilla('Cataratas del Iguazú', 'Argentina y Brasil', 'natural'), criterio='nombre')
     grafo_maravillas.insert_vertex(Maravilla('Isla Jeju', 'Corea del Sur', 'natural'), criterio='nombre')
@@ -99,13 +99,48 @@ insertar_aristas()
 
 
 
-#print(grafo_maravillas.barrido())
+
 def c():
-    bosque = grafo_maravillas.kruskal_original()
+    bosque = grafo_maravillas.kruskal()
     for arbol in bosque:
         print('arbol')
         for nodo in arbol.split(';'):
             print(nodo)
-        print('El total es de ', total)
 
-c()
+
+def d():
+    grafo_maravillas.barrido_maravilla()
+
+def e(): #Creo que la idea de este punto era preguntarle al usuario que país quiere verificar, y hacer un search, pero...
+    def paisesMasDeUna(grafo):
+        conteo_por_pais_tipo = {} #Este diccionario va a almacenar la concatenación de país - tipo de maravilla - cantidad de TODOS los paises
+
+        #Iterar en todos los vertices del grafo y agregarlos al diccionario
+        for vertice in grafo._Grafo__elements:
+            maravilla = vertice[0]   #[0] = Vertice / [1] = Lista de aristas / [2] = Marcador de visitado
+            pais = maravilla.pais
+            tipo = maravilla.tipo
+            key = f"{pais}-{tipo}"
+
+ 
+            if key in conteo_por_pais_tipo:
+                conteo_por_pais_tipo[key] += 1
+            else:
+                conteo_por_pais_tipo[key] = 1
+
+        # Verificar y obtener los países con más de una maravilla del mismo tipo
+        paises_con_mas_de_una_maravilla = []
+        for key, cantidad in conteo_por_pais_tipo.items():
+            if cantidad > 1:
+                pais, tipo = key.split('-')
+                paises_con_mas_de_una_maravilla.append((pais, tipo, cantidad))
+
+        return paises_con_mas_de_una_maravilla
+
+
+    paises_con_mas_de_una_maravilla = paisesMasDeUna(grafo_maravillas)
+    print("Países con más de una maravilla del mismo tipo:")
+    for pais, tipo, cantidad in paises_con_mas_de_una_maravilla:
+        print(f"{pais} tiene {cantidad} maravillas de tipo {tipo}")
+
+e()
