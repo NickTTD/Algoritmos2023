@@ -109,7 +109,7 @@ def c():
 
 
 def d():
-    grafo_maravillas.barrido_maravilla()
+    grafo_maravillas.barrido_maravilla_compartePais()
 
 def e(): #Creo que la idea de este punto era preguntarle al usuario que país quiere verificar, y hacer un search, pero...
     def paisesMasDeUna(grafo):
@@ -143,4 +143,4 @@ def e(): #Creo que la idea de este punto era preguntarle al usuario que país qu
     for pais, tipo, cantidad in paises_con_mas_de_una_maravilla:
         print(f"{pais} tiene {cantidad} maravillas de tipo {tipo}")
 
-e()
+d()

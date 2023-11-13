@@ -107,7 +107,7 @@ class Grafo():
                     coincidentes.append(vertice2[0])
 
             if coincidentes:
-                print(f"Maravillas en {vertice1[0].pais} con el mismo país:")
+                print(f"Maravillas en {vertice1[0].pais} con el mismo tipo:")
                 print(vertice1[0])
                 for coincidente in coincidentes:
                     print(coincidente)
